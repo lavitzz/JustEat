@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Header</title>
+    </h:head>
+    <h:body>
+            <b:navBar brand="ComidaDomicilio" brandHref="#" inverse="true" fixed="top">
+            <b:navbarLinks>
+                <b:navLink value="Inicio" href="/faces/VistaLogued"></b:navLink>
+            </b:navbarLinks>
+            <h:form styleClass="navbar-form navbar-right">
+                <h:outputText styleClass="logintext" value="Logued as: #{loginBean.user.email}  "/>
+                <b:commandButton action="#{loginBean.doLogout()}" value="Logout" look="danger" icon="glyphicon-remove" iconAlign="right"/>
+            </h:form>
+        </b:navBar>
+    </h:body>
+</html>
+
