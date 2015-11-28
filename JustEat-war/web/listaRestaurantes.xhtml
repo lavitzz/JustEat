@@ -34,7 +34,7 @@
                     #{restaurante.telefono}
                 </h:column>
                 <h:column>
-                    <h:commandLink value="Edit" action="#{buscarRestauranteBean.doBuscarMenus()}">
+                    <h:commandLink value="Menus" action="#{buscarRestauranteBean.doBuscarMenus()}">
                         <f:setPropertyActionListener value="#{restaurante}" target="#{buscarRestauranteBean.restauranteSeleccionado}"/>
                     </h:commandLink>
                 </h:column>

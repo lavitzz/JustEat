@@ -76,7 +76,7 @@ public class BuscarRestauranteBean {
     
     public String doBuscarMenus(){
         menus = this.menuFacade.findByRestaurante(restauranteSeleccionado.getCif());
-        return "/faces/listarmenus.xhtml";
+        return "/faces/listarMenus.xhtml";
     }
     
     public String doNada(){

@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p"),
     @NamedQuery(name = "Pedido.findByIdPedido", query = "SELECT p FROM Pedido p WHERE p.idPedido = :idPedido"),
     @NamedQuery(name = "Pedido.findByCantidadmenu", query = "SELECT p FROM Pedido p WHERE p.cantidadmenu = :cantidadmenu"),
-    @NamedQuery(name = "Pedido.findByCantidadplato", query = "SELECT p FROM Pedido p WHERE p.cantidadplato = :cantidadplato"),
     @NamedQuery(name = "Pedido.findByPreciototal", query = "SELECT p FROM Pedido p WHERE p.preciototal = :preciototal"),
     @NamedQuery(name = "Pedido.findByGastosenvio", query = "SELECT p FROM Pedido p WHERE p.gastosenvio = :gastosenvio")})
 public class Pedido implements Serializable {
@@ -42,8 +41,6 @@ public class Pedido implements Serializable {
     private Integer idPedido;
     @Column(name = "CANTIDADMENU")
     private Integer cantidadmenu;
-    @Column(name = "CANTIDADPLATO")
-    private Integer cantidadplato;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -56,9 +53,6 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "ID_MENU", referencedColumnName = "ID_MENU")
     @ManyToOne
     private Menu idMenu;
-    @JoinColumn(name = "ID_PLATO", referencedColumnName = "ID_PLATO")
-    @ManyToOne
-    private Plato idPlato;
     @JoinColumn(name = "CIF", referencedColumnName = "CIF")
     @ManyToOne(optional = false)
     private Restaurante cif;
@@ -95,14 +89,6 @@ public class Pedido implements Serializable {
         this.cantidadmenu = cantidadmenu;
     }
 
-    public Integer getCantidadplato() {
-        return cantidadplato;
-    }
-
-    public void setCantidadplato(Integer cantidadplato) {
-        this.cantidadplato = cantidadplato;
-    }
-
     public BigDecimal getPreciototal() {
         return preciototal;
     }
@@ -125,14 +111,6 @@ public class Pedido implements Serializable {
 
     public void setIdMenu(Menu idMenu) {
         this.idMenu = idMenu;
-    }
-
-    public Plato getIdPlato() {
-        return idPlato;
-    }
-
-    public void setIdPlato(Plato idPlato) {
-        this.idPlato = idPlato;
     }
 
     public Restaurante getCif() {
