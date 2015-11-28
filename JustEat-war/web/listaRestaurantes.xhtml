@@ -2,43 +2,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:outputStylesheet library="css" name="listas.css"  />
     <h:head>
         <title>Lista de Restaurantes</title>
     </h:head>
     <h:body>
+        <p id="textoentrada"> Lista de Restaurantes </p>
         <h:form>
-            <h:dataTable value="#{buscarRestauranteBean.restaurantes}" var="restaurante" border="1">
-                <h:column>
+            <p:dataTable value="#{buscarRestauranteBean.restaurantes}" var="restaurante" id="panel">
+                <p:column>
                     <f:facet name="header">
                         Nombre
                     </f:facet>
                     #{restaurante.nombre}
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        Direccion
+                        Nombre
                     </f:facet>
                     #{restaurante.direccion}
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        Ciudad
+                        Nombre
                     </f:facet>
                     #{restaurante.ciudad}
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
-                        Telefono
+                        Nombre
                     </f:facet>
                     #{restaurante.telefono}
-                </h:column>
-                <h:column>
-                    <h:commandLink value="Menus" action="#{buscarRestauranteBean.doBuscarMenus()}">
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Ver Menus" action="#{buscarRestauranteBean.doBuscarMenus()}">
                         <f:setPropertyActionListener value="#{restaurante}" target="#{buscarRestauranteBean.restauranteSeleccionado}"/>
-                    </h:commandLink>
-                </h:column>
-            </h:dataTable>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </h:body>
 </html>

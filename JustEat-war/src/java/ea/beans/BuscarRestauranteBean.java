@@ -70,11 +70,11 @@ public class BuscarRestauranteBean {
     
     public String doBuscarRestaurantes(){
         restaurantes = this.restauranteFacade.buscarPorCP(this.codigoPostal);
-        return "listaRestaurantes.xhtml";
+        return "VistaRestaurantes.xhtml";
     }
     
     public String doBuscarMenus(){
         menus = this.menuFacade.findByRestaurante(restauranteSeleccionado.getCif());
-        return "listarMenus.xhtml";
+        return "VistaMenus.xhtml";
     }
 }

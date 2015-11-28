@@ -72,6 +72,5 @@ public class PedidoBean {
         p.setPreciototal(BigDecimal.ZERO);
         p.setCantidadmenu(1);
         this.pedidoFacade.create(p);
-        //return "VistaInicio.xhtml";
     }
 }

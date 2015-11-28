@@ -9,14 +9,16 @@
     <h:body>
         <h:form>
             <div id="panel">
-            <b:panel>
-                <b:panelGrid colSpans="7,5">
-                    <h:inputText class="busqueda" value="#{buscarRestauranteBean.codigoPostal}"/>
-                    <h:commandButton value="Buscar" action="#{buscarRestauranteBean.doBuscarRestaurantes}"/>
-                </b:panelGrid>
-            </b:panel>
+                <b:panel>
+                    <b:panelGrid colSpans="7,5">
+                        <h:inputText class="busqueda" value="#{buscarRestauranteBean.codigoPostal}"/>
+                        <h:commandButton value="Buscar" action="#{buscarRestauranteBean.doBuscarRestaurantes}"/>
+                    </b:panelGrid>
+                </b:panel>
             </div>
         </h:form>
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>
 </html>
 
