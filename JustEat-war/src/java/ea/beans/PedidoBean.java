@@ -61,17 +61,17 @@ public class PedidoBean {
         this.pedido = pedido;
     }
 
-    public String doAddPedido(){
+    public void doAddPedido(){
         Restaurante res = menuSeleccionado.getCif();
         Pedido p = new Pedido();
         p.setCif(res);
         p.setDni(loginBean.getUser());
         p.setGastosenvio(new BigDecimal(0));
         p.setIdMenu(menuSeleccionado);
-        p.setIdPedido(15);
+        //p.setIdPedido(15);
         p.setPreciototal(BigDecimal.ZERO);
         p.setCantidadmenu(1);
         this.pedidoFacade.create(p);
-        return "listarMenus.xhtml";
+        //return "VistaInicio.xhtml";
     }
 }
