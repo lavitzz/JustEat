@@ -31,8 +31,8 @@
                     <f:facet name="header">
                         Añadir al pedido
                     </f:facet>
-                    <h:commandLink action="#{buscarRestauranteBean.doNada()}" value="Añadir al Pedido">
-                        
+                    <h:commandLink action="#{pedidoBean.doAddPedido()}" value="Añadir al Pedido">
+                        <f:setPropertyActionListener value="#{menu}" target="#{pedidoBean.menuSeleccionado}"/>
                     </h:commandLink>
                 </h:column>    
             </h:dataTable>

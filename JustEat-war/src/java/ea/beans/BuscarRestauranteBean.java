@@ -12,7 +12,6 @@ import ea.entity.Restaurante;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -71,16 +70,11 @@ public class BuscarRestauranteBean {
     
     public String doBuscarRestaurantes(){
         restaurantes = this.restauranteFacade.buscarPorCP(this.codigoPostal);
-        return "/faces/listaRestaurantes.xhtml";
+        return "listaRestaurantes.xhtml";
     }
     
     public String doBuscarMenus(){
         menus = this.menuFacade.findByRestaurante(restauranteSeleccionado.getCif());
-        return "/faces/listarMenus.xhtml";
+        return "listarMenus.xhtml";
     }
-    
-    public String doNada(){
-        return "login.xhtml";
-    }
-    
 }
