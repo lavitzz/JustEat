@@ -9,7 +9,10 @@ import ea.ejb.PedidoFacade;
 import ea.entity.Menu;
 import ea.entity.Pedido;
 import ea.entity.Restaurante;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -31,13 +34,31 @@ public class PedidoBean {
     
     private Menu menuSeleccionado;
     private Pedido pedido;
-    private List<Pedido> pedidos;
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
     private Pedido pedidoSeleccionado;
+    private Integer[] cantidadMenu = {5,4,3,2,1};
+    private String cantidadSeleccionada;
     
     /**
      * Creates a new instance of PedidoBean
      */
     public PedidoBean() {
+    }
+
+    public String getCantidadSeleccionada() {
+        return cantidadSeleccionada;
+    }
+
+    public void setCantidadSeleccionada(String cantidadSeleccionada) {
+        this.cantidadSeleccionada = cantidadSeleccionada;
+    }
+
+    public Integer[] getCantidadMenu() {
+        return cantidadMenu;
+    }
+
+    public void setCantidadMenu(Integer[] cantidadMenu) {
+        this.cantidadMenu = cantidadMenu;
     }
 
     public Pedido getPedidoSeleccionado() {
@@ -80,19 +101,25 @@ public class PedidoBean {
         this.pedido = pedido;
     }
 
-    public void doAddPedido(){
-        Restaurante res = menuSeleccionado.getCif();
+    public String doAddPedido(){
         Pedido p = new Pedido();
-        p.setCif(res);
+        
+        p.setCif(menuSeleccionado.getCif());
         p.setDni(loginBean.getUser());
         p.setIdMenu(menuSeleccionado);
-        //p.setIdPedido(15);
-        p.setCantidadmenu(1);
+        //p.setCantidadmenu(cantidadSeleccionada);
         p.setPagado(0);
-        this.pedidoFacade.create(p);
+        
+        pedidos.add(p);
+        
+        return "VistaMenus.xhtml";
     }
     
     public void doEliminarPedido(){
+        
+    }
+    
+    public void doNada(){
         
     }
     
