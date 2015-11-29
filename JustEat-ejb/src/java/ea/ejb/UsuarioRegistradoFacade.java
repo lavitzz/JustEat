@@ -47,4 +47,20 @@ public class UsuarioRegistradoFacade extends AbstractFacade<UsuarioRegistrado> {
         }
         return usuario;      
     }
+    
+    public List distintosCodPostales(){
+         
+        List lista = em.createNativeQuery("Select Distinct(CODPOSTAL) "
+                + "from USUARIO_REGISTRADO order by CODPOSTAL").getResultList();
+                 
+        return lista;
+    }
+     
+    public int usuariosPorCodPostal(String cPostal){
+         
+        List lista;
+        lista = em.createQuery("Select u from UsuarioRegistrado u  where u.codpostal=:codPostal").setParameter("codPostal", cPostal).getResultList();
+         
+        return lista.size();
+    }
 }
