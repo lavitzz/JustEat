@@ -8,13 +8,9 @@ package ea.beans;
 import ea.ejb.PedidoFacade;
 import ea.entity.Menu;
 import ea.entity.Pedido;
-import ea.entity.Restaurante;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -35,22 +31,14 @@ public class PedidoBean {
     
     private Menu menuSeleccionado;
     private Pedido pedido;
-    private List<Pedido> pedidos = new ArrayList<Pedido>();
     private Pedido pedidoSeleccionado;
-    private String cantidadSeleccionada;
-    
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
+    private String cantidadSeleccionada = "";
+    private Integer[] cantidades = {1,2,3,4,5};
     /**
      * Creates a new instance of PedidoBean
      */
     public PedidoBean() {
-    }
-
-    public String getCantidadSeleccionada() {
-        return cantidadSeleccionada;
-    }
-
-    public void setCantidadSeleccionada(String cantidadSeleccionada) {
-        this.cantidadSeleccionada = cantidadSeleccionada;
     }
 
     public Pedido getPedidoSeleccionado() {
@@ -59,6 +47,22 @@ public class PedidoBean {
 
     public void setPedidoSeleccionado(Pedido pedidoSeleccionado) {
         this.pedidoSeleccionado = pedidoSeleccionado;
+    }
+
+    public Integer[] getCantidades() {
+        return cantidades;
+    }
+
+    public void setCantidades(Integer[] cantidades) {
+        this.cantidades = cantidades;
+    }
+
+    public String getCantidadSeleccionada() {
+        return cantidadSeleccionada;
+    }
+
+    public void setCantidadSeleccionada(String cantidadSeleccionada) {
+        this.cantidadSeleccionada = cantidadSeleccionada;
     }
 
     public List<Pedido> getPedidos() {
@@ -94,21 +98,24 @@ public class PedidoBean {
     }
 
     public String doAddPedido(){
-        Pedido p = new Pedido();
+        pedido = new Pedido();
         
-        p.setCif(menuSeleccionado.getCif());
-        p.setDni(loginBean.getUser());
-        p.setIdMenu(menuSeleccionado);
-        p.setCantidadmenu(1);
-        p.setPagado(0);
+        pedido.setCif(menuSeleccionado.getCif());
+        pedido.setDni(loginBean.getUser());
+        pedido.setIdMenu(menuSeleccionado);
+        pedido.setPagado(0);
+        pedido.setCantidadmenu(Integer.parseInt(cantidadSeleccionada));
         
-        pedidos.add(p);
+        pedidos.add(pedido);
         
         return "VistaMenus.xhtml";
     }
     
     public void doEliminarPedido(){
-        
+        int i = pedidos.indexOf(pedidoSeleccionado);
+        if (i!=-1){
+            pedidos.remove(i);
+        }
     }
     
     public void doPagar(){
@@ -120,10 +127,5 @@ public class PedidoBean {
             this.pedidoFacade.create(p);
             pedidosIterator.remove();
         }
-    }
-    
-    @PostConstruct
-    public void init(){
-        //pedidos = this.pedidoFacade.buscarPedidoUsuario(loginBean.getUser().getDni());
     }
 }
