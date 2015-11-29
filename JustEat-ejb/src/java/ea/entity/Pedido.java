@@ -6,7 +6,6 @@
 package ea.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,8 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p"),
     @NamedQuery(name = "Pedido.findByIdPedido", query = "SELECT p FROM Pedido p WHERE p.idPedido = :idPedido"),
     @NamedQuery(name = "Pedido.findByCantidadmenu", query = "SELECT p FROM Pedido p WHERE p.cantidadmenu = :cantidadmenu"),
-    @NamedQuery(name = "Pedido.findByPreciototal", query = "SELECT p FROM Pedido p WHERE p.preciototal = :preciototal"),
-    @NamedQuery(name = "Pedido.findByGastosenvio", query = "SELECT p FROM Pedido p WHERE p.gastosenvio = :gastosenvio")})
+    @NamedQuery(name = "Pedido.findByPagado", query = "SELECT p FROM Pedido p WHERE p.pagado = :pagado")})
 public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,15 +41,10 @@ public class Pedido implements Serializable {
     private Integer idPedido;
     @Column(name = "CANTIDADMENU")
     private Integer cantidadmenu;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "PRECIOTOTAL")
-    private BigDecimal preciototal;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "GASTOSENVIO")
-    private BigDecimal gastosenvio;
+    @Column(name = "PAGADO")
+    private int pagado;
     @JoinColumn(name = "ID_MENU", referencedColumnName = "ID_MENU")
     @ManyToOne
     private Menu idMenu;
@@ -69,10 +62,9 @@ public class Pedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public Pedido(Integer idPedido, BigDecimal preciototal, BigDecimal gastosenvio) {
+    public Pedido(Integer idPedido, int pagado) {
         this.idPedido = idPedido;
-        this.preciototal = preciototal;
-        this.gastosenvio = gastosenvio;
+        this.pagado = pagado;
     }
 
     public Integer getIdPedido() {
@@ -91,20 +83,12 @@ public class Pedido implements Serializable {
         this.cantidadmenu = cantidadmenu;
     }
 
-    public BigDecimal getPreciototal() {
-        return preciototal;
+    public int getPagado() {
+        return pagado;
     }
 
-    public void setPreciototal(BigDecimal preciototal) {
-        this.preciototal = preciototal;
-    }
-
-    public BigDecimal getGastosenvio() {
-        return gastosenvio;
-    }
-
-    public void setGastosenvio(BigDecimal gastosenvio) {
-        this.gastosenvio = gastosenvio;
+    public void setPagado(int pagado) {
+        this.pagado = pagado;
     }
 
     public Menu getIdMenu() {

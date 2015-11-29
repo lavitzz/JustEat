@@ -9,7 +9,8 @@ import ea.ejb.PedidoFacade;
 import ea.entity.Menu;
 import ea.entity.Pedido;
 import ea.entity.Restaurante;
-import java.math.BigDecimal;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -30,11 +31,29 @@ public class PedidoBean {
     
     private Menu menuSeleccionado;
     private Pedido pedido;
+    private List<Pedido> pedidos;
+    private Pedido pedidoSeleccionado;
     
     /**
      * Creates a new instance of PedidoBean
      */
     public PedidoBean() {
+    }
+
+    public Pedido getPedidoSeleccionado() {
+        return pedidoSeleccionado;
+    }
+
+    public void setPedidoSeleccionado(Pedido pedidoSeleccionado) {
+        this.pedidoSeleccionado = pedidoSeleccionado;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     public LoginBean getLoginBean() {
@@ -66,11 +85,19 @@ public class PedidoBean {
         Pedido p = new Pedido();
         p.setCif(res);
         p.setDni(loginBean.getUser());
-        p.setGastosenvio(new BigDecimal(0));
         p.setIdMenu(menuSeleccionado);
         //p.setIdPedido(15);
-        p.setPreciototal(BigDecimal.ZERO);
         p.setCantidadmenu(1);
+        p.setPagado(0);
         this.pedidoFacade.create(p);
+    }
+    
+    public void doEliminarPedido(){
+        
+    }
+    
+    @PostConstruct
+    public void init(){
+        //pedidos = this.pedidoFacade.buscarPedidoUsuario(loginBean.getUser().getDni());
     }
 }

@@ -6,6 +6,7 @@
 package ea.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -39,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Restaurante.findByTelefono", query = "SELECT r FROM Restaurante r WHERE r.telefono = :telefono"),
     @NamedQuery(name = "Restaurante.findByEmail", query = "SELECT r FROM Restaurante r WHERE r.email = :email"),
     @NamedQuery(name = "Restaurante.findByLatitud", query = "SELECT r FROM Restaurante r WHERE r.latitud = :latitud"),
-    @NamedQuery(name = "Restaurante.findByLongitud", query = "SELECT r FROM Restaurante r WHERE r.longitud = :longitud")})
+    @NamedQuery(name = "Restaurante.findByLongitud", query = "SELECT r FROM Restaurante r WHERE r.longitud = :longitud"),
+    @NamedQuery(name = "Restaurante.findByGastosenvio", query = "SELECT r FROM Restaurante r WHERE r.gastosenvio = :gastosenvio")})
 public class Restaurante implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -76,6 +78,9 @@ public class Restaurante implements Serializable {
     @Size(max = 25)
     @Column(name = "LONGITUD")
     private String longitud;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "GASTOSENVIO")
+    private BigDecimal gastosenvio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cif")
     private Collection<Pedido> pedidoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cif")
@@ -166,6 +171,14 @@ public class Restaurante implements Serializable {
 
     public void setLongitud(String longitud) {
         this.longitud = longitud;
+    }
+
+    public BigDecimal getGastosenvio() {
+        return gastosenvio;
+    }
+
+    public void setGastosenvio(BigDecimal gastosenvio) {
+        this.gastosenvio = gastosenvio;
     }
 
     @XmlTransient

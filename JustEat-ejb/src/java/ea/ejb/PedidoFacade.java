@@ -6,9 +6,11 @@
 package ea.ejb;
 
 import ea.entity.Pedido;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,4 +30,14 @@ public class PedidoFacade extends AbstractFacade<Pedido> {
         super(Pedido.class);
     }
     
+    public List<Pedido> buscarPedidoUsuario(String dni) {
+        Query q;
+        List<Pedido> listaPedidos;
+        
+        q = em.createQuery("SELECT p FROM Pedido p WHERE p.dni.dni = :dni AND p.pagado = 0");
+        q.setParameter("dni", dni);
+        listaPedidos = q.getResultList();
+        
+        return listaPedidos;
+    }
 }
