@@ -11,6 +11,7 @@ import ea.entity.Pedido;
 import ea.entity.Restaurante;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -36,7 +37,6 @@ public class PedidoBean {
     private Pedido pedido;
     private List<Pedido> pedidos = new ArrayList<Pedido>();
     private Pedido pedidoSeleccionado;
-    private Integer[] cantidadMenu = {5,4,3,2,1};
     private String cantidadSeleccionada;
     
     /**
@@ -51,14 +51,6 @@ public class PedidoBean {
 
     public void setCantidadSeleccionada(String cantidadSeleccionada) {
         this.cantidadSeleccionada = cantidadSeleccionada;
-    }
-
-    public Integer[] getCantidadMenu() {
-        return cantidadMenu;
-    }
-
-    public void setCantidadMenu(Integer[] cantidadMenu) {
-        this.cantidadMenu = cantidadMenu;
     }
 
     public Pedido getPedidoSeleccionado() {
@@ -107,7 +99,7 @@ public class PedidoBean {
         p.setCif(menuSeleccionado.getCif());
         p.setDni(loginBean.getUser());
         p.setIdMenu(menuSeleccionado);
-        //p.setCantidadmenu(cantidadSeleccionada);
+        p.setCantidadmenu(1);
         p.setPagado(0);
         
         pedidos.add(p);
@@ -119,8 +111,15 @@ public class PedidoBean {
         
     }
     
-    public void doNada(){
-        
+    public void doPagar(){
+        Iterator<Pedido> pedidosIterator = pedidos.iterator();
+        while (pedidosIterator.hasNext()){
+            Pedido p = new Pedido();
+            p = pedidosIterator.next();
+            p.setPagado(1);
+            this.pedidoFacade.create(p);
+            pedidosIterator.remove();
+        }
     }
     
     @PostConstruct
