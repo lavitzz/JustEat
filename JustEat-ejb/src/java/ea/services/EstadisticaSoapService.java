@@ -24,13 +24,14 @@ public class EstadisticaSoapService {
     private UsuarioRegistradoFacade usuarioRegistradoFacade;
     @EJB
     private PedidoFacade pedidoFacade;
-
+    
     //Devuelve el numero de usuarios del sistema.
     public int getNumUsuarios(){
         int num=-1;
         num = usuarioRegistradoFacade.count();
         return num;
     }
+    
     
     public String[] getTopFiveMenus(){
         
